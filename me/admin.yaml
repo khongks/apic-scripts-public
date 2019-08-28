@@ -1,0 +1,15 @@
+type: me
+api_version: 2.0.0
+name: admin
+state: enabled
+identity_provider: default-idp-1
+username: admin
+email: kskhong@au1.ibm.com
+first_name: Cloud
+last_name: Owner
+metadata:
+  id: e37b408b-2f58-4f96-8259-8e9c0c754412
+  name: admin
+  username: admin
+url: >-
+  https://cloud-admin-ui.9.30.122.188.nip.io/api/user-registries/52431536-fff0-419f-9223-8fb951fc99bd/4389a811-1b61-461f-a657-d81680ba095a/users/ff6c8283-a333-45de-a4fc-759d693af200

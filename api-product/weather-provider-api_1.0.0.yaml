@@ -1,0 +1,151 @@
+swagger: "2.0"
+info:
+  title: Weather Provider API
+  x-ibm-name: weather-provider-api
+  version: 1.0.0
+schemes:
+- https
+basePath: /weather
+produces:
+- application/json
+consumes:
+- application/json
+security: []
+securityDefinitions:
+  Client-Secret:
+    type: apiKey
+    description: ""
+    in: header
+    name: X-IBM-Client-Secret
+x-ibm-configuration:
+  enforced: true
+  testable: true
+  phase: realized
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - switch:
+        version: 2.0.0
+        title: switch
+        case:
+        - condition: (($httpVerb() = 'GET' and $operationPath() = '/current'))
+          execute:
+          - invoke:
+              version: 2.0.0
+              title: invoke-current
+              header-control:
+                type: blacklist
+                values: []
+              parameter-control:
+                type: whitelist
+                values: []
+              timeout: 60
+              verb: keep
+              cache-response: protocol
+              cache-ttl: 900
+              stop-on-error: []
+              target-url: https://myweatherprovider.mybluemix.net/current?zipcode=$(request.parameters.zipcode)
+          - gatewayscript:
+              version: 2.0.0
+              title: gatewayscript
+              source: "var apim = require('apim');\n//get the runtime API context\nvar
+                json = apim.getvariable('message');\nconsole.error(\"json %s\", JSON.stringify(json.headers));\n\t\n//add
+                a new attribute to the payload body \njson.body.platform = 'Powered
+                by IBM API Connect';\napim.setvariable('message.body', json.body);\n\n//add
+                a new response header\njson.headers.platform = 'Powered by IBM API
+                Connect';\napim.setvariable('message.headers', json.headers);"
+        - condition: (($httpVerb() = 'GET' and $operationPath() = '/today'))
+          execute:
+          - invoke:
+              version: 2.0.0
+              title: invoke-today
+              header-control:
+                type: blacklist
+                values: []
+              parameter-control:
+                type: whitelist
+                values: []
+              timeout: 60
+              verb: keep
+              cache-response: protocol
+              cache-ttl: 900
+              stop-on-error: []
+              target-url: https://myweatherprovider.mybluemix.net/today?zipcode=$(request.parameters.zipcode)
+    catch: []
+  gateway: datapower-api-gateway
+  type: rest
+  activity-log:
+    enabled: true
+    error-content: header
+    success-content: activity
+  application-authentication:
+    certificate: false
+  properties:
+    target-url:
+      value: http://example.com/operation-name
+      description: The URL of the target service
+      encoded: false
+definitions:
+  Today:
+    type: object
+    properties:
+      zip:
+        type: string
+      hi:
+        type: integer
+      lo:
+        type: integer
+      nightHumidity:
+        type: integer
+      city:
+        type: string
+      state:
+        type: string
+      dayHumidity:
+        type: integer
+  Current:
+    type: object
+    properties:
+      zip:
+        type: string
+      temperature:
+        type: integer
+      humidity:
+        type: integer
+      city:
+        type: string
+      state:
+        type: string
+paths:
+  /current:
+    get:
+      summary: Current Weather
+      parameters:
+      - name: zipcode
+        in: query
+        description: A valid 5-digit US zip code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Current'
+  /today:
+    get:
+      summary: Today's Weather
+      parameters:
+      - name: zipcode
+        in: query
+        description: A valid 5-digit US zip code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Profile information for a user
+          schema:
+            $ref: '#/definitions/Today'
+      security:
+      - ClientID: []
+        Client-Secret: []

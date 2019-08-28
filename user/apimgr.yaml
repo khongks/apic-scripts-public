@@ -1,0 +1,24 @@
+type: user
+api_version: 2.0.0
+id: 3c7e7456-343c-4171-ad48-5781fe66c906
+name: apimgr
+title: apimgr
+state: enabled
+identity_provider: default-idp-2
+username: apimgr
+email: apimgr71@yahoo.com
+first_name: Alan
+last_name: Khong
+metadata:
+  id: 30765bf6-1406-406d-8507-8d0f3e588849
+  name: apimgr
+  username: apimgr
+last_login_at: '2019-08-27T02:25:07.322Z'
+created_at: '2019-08-26T09:15:34.349Z'
+updated_at: '2019-08-27T02:25:07.364Z'
+org_url: >-
+  https://cloud-admin-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd
+user_registry_url: >-
+  https://cloud-admin-ui.9.30.122.188.nip.io/api/user-registries/52431536-fff0-419f-9223-8fb951fc99bd/91c10385-003b-4f33-9844-7bc61c4229fe
+url: >-
+  https://cloud-admin-ui.9.30.122.188.nip.io/api/user-registries/52431536-fff0-419f-9223-8fb951fc99bd/91c10385-003b-4f33-9844-7bc61c4229fe/users/3c7e7456-343c-4171-ad48-5781fe66c906

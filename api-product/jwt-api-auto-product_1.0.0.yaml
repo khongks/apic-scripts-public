@@ -1,0 +1,29 @@
+product: 1.0.0
+info:
+  name: jwt-api-auto-product
+  title: JWT API auto product
+  version: 1.0.0
+gateways:
+- datapower-api-gateway
+apis:
+  JWT API:
+    $ref: jwt-api_1.0.0.yaml
+visibility:
+  view:
+    enabled: true
+    type: public
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: authenticated
+    tags: []
+    orgs: []
+plans:
+  default:
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    rate-limit:
+      value: 100/hour
+      hard-limit: false

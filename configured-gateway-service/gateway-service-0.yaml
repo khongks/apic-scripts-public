@@ -1,0 +1,41 @@
+type: configured_gateway_service
+api_version: 2.0.0
+id: 089f424f-0b68-4829-a2b2-151f3f2198f1
+name: gateway-service
+title: gateway-service
+scope: catalog
+gateway_service_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/orgs/a00c46e3-34f9-4886-9957-3cc1632ef12f/gateway-services/423f988c-ffd5-4daa-a3b0-8a472f893e71
+integration_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/cloud/integrations/gateway-service/2dcc0fed-e26c-4d24-994e-6bdeec2cb5e9
+gateway_service_type: datapower-api-gateway
+owned: true
+configuration:
+  domain_name: apiconnect
+  gateway_version: 6.0.0.0
+  managed_by: apim
+availability_zone_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/availability-zones/52ca6a5a-1bdc-4f61-8456-6646505f6d11
+endpoint: 'https://gateway-service.9.30.122.188.nip.io'
+api_endpoint_base: 'https://api-gateway.9.30.122.188.nip.io'
+catalog_base: 'https://api-gateway.9.30.122.188.nip.io/think/test'
+sni:
+  - host: '*'
+    tls_server_profile_url: >-
+      https://api-manager-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/tls-server-profiles/03b3e15f-f32f-4951-a431-60f9e085abee
+tls_client_profile_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/tls-client-profiles/f42aa503-a94b-4718-a0e1-2ad0c2da4733
+analytics_service_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/availability-zones/52ca6a5a-1bdc-4f61-8456-6646505f6d11/analytics-services/9e56e2b7-6307-4f57-92a5-0100075e87f5
+webhook_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/cloud/webhooks/8451e1b8-6d4e-4d58-a53c-588ad3b8afb2
+catalog_webhook_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/catalogs/a00c46e3-34f9-4886-9957-3cc1632ef12f/768be091-1495-43cb-b4f8-2a9c18a463c2/webhooks/a90dc0e4-e827-4303-becc-e81f0df76702
+created_at: '2019-08-24T16:17:39.164Z'
+updated_at: '2019-08-27T03:36:26.066Z'
+org_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/orgs/a00c46e3-34f9-4886-9957-3cc1632ef12f
+catalog_url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/catalogs/a00c46e3-34f9-4886-9957-3cc1632ef12f/768be091-1495-43cb-b4f8-2a9c18a463c2
+url: >-
+  https://api-manager-ui.9.30.122.188.nip.io/api/catalogs/a00c46e3-34f9-4886-9957-3cc1632ef12f/768be091-1495-43cb-b4f8-2a9c18a463c2/configured-gateway-services/089f424f-0b68-4829-a2b2-151f3f2198f1
