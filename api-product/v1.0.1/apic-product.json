@@ -1,0 +1,35 @@
+{
+   "product":"1.0.0",
+   "info":{
+      "name":"cargo-announcements-product",
+      "title":"Cargo Announcements Product",
+      "version":"1.0.1"
+   },
+   "gateways":[
+      "datapower-api-gateway"
+   ],
+   "plans":{
+      "default":{
+         "title":"Default Plan",
+         "description":"Default Plan",
+         "approval":false,
+         "rate-limit":{
+            "value":"100/hour",
+            "hard-limit":false
+         }
+      }
+   },
+   "visibility":{
+      "view":{
+         "type":"public"
+      },
+      "subscribe":{
+         "type":"authenticated"
+      }
+   },
+   "apis":{
+      "Cargo Announcements":{
+         "$ref":"apic-swagger.json"
+      }
+   }
+}
