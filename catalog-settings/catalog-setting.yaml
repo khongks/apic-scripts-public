@@ -1,0 +1,5 @@
+portal:
+  type: drupal
+  endpoint: https://portal-web.think.org/think-provider-organization/staging
+  portal_service_url: >-
+    https://api-manager-ui.think.org/api/orgs/541ec5e1-71f8-4cc2-9c6f-e0a66adcd232/portal-services/37d8d4b3-cd44-49c4-a666-c872aee16ded

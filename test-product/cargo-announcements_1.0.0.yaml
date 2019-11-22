@@ -1,0 +1,1258 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: 1.0.0
+  title: Cargo Announcements
+  x-ibm-name: cargo-announcements
+host: $(catalog.host)
+basePath: /cargo/v1
+schemes:
+- https
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /announcements:
+    get:
+      tags:
+      - apiannouncements
+      summary: Returns a list of announcements to the user based upon there user classification
+        and search criteria
+      description: Returns a list of announcements to the user based upon there user
+        classification and search criteria
+      operationId: getSvcAnnouncementsList
+      parameters:
+      - name: requestId
+        in: header
+        required: true
+        type: string
+        maxLength: 36
+      - name: correlationId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: environ
+        in: header
+        required: false
+        type: string
+      - name: announcementType
+        in: query
+        required: true
+        type: string
+        maxLength: 3
+      - name: announcementTitle
+        in: query
+        required: false
+        type: string
+        maxLength: 100
+      - name: announcementText
+        in: query
+        required: false
+        type: string
+        maxLength: 1000
+      - name: currentAnnouncementsInd
+        in: query
+        required: false
+        type: string
+        maxLength: 1
+      - name: expiredAnnouncementsInd
+        in: query
+        required: false
+        type: string
+        maxLength: 1
+      - name: futureAnnouncementsInd
+        in: query
+        required: false
+        type: string
+        maxLength: 1
+      - name: announcementWithdrawnInd
+        in: query
+        required: false
+        type: string
+        maxLength: 1
+      - name: numberOfRecordsToReturn
+        in: query
+        required: false
+        type: string
+        maxLength: 3
+      - in: body
+        name: getSvcAnnouncementsList_request
+        description: request body
+        required: true
+        schema:
+          $ref: '#/definitions/getSvcAnnouncementsList_request'
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/getSvcAnnouncementsList_response_200'
+          headers:
+            Request-ID:
+              type: string
+              maxLength: 36
+            Correlation-ID:
+              type: string
+              maxLength: 36
+        "204":
+          description: No Content
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "206":
+          description: Partial Content
+          schema:
+            $ref: '#/definitions/getSvcAnnouncementsList_response_206'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correletionId:
+              type: string
+              maxLength: 36
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/getSvcAnnouncementsList_response_400'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "401":
+          description: Unauthorized
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+      security:
+      - clientIdHeader: []
+    post:
+      tags:
+      - apiannouncements
+      summary: This method creates a new announcement.
+      description: This method creates a new announcement.
+      operationId: postSvcAnnouncementAmend
+      parameters:
+      - name: requestId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: correlationId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: environ
+        in: header
+        required: false
+        type: string
+      - in: body
+        name: postSvcAnnouncementAmend_request
+        description: request body
+        required: true
+        schema:
+          $ref: '#/definitions/postSvcAnnouncementAmend_request'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/postSvcAnnouncementAmend_response_201'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/postSvcAnnouncementAmend_response_400'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "401":
+          description: Unauthorized
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+      security:
+      - clientIdHeader: []
+  /announcements/{announcementId}:
+    get:
+      tags:
+      - apiannouncements
+      summary: Returns the details of an announcement
+      description: Returns the details of an announcement
+      operationId: getSvcAnnouncementsView
+      parameters:
+      - name: requestId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: correlationId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: environ
+        in: header
+        required: false
+        type: string
+      - name: announcementId
+        in: path
+        required: true
+        type: string
+        maxLength: 20
+      - in: body
+        name: getSvcAnnouncementsView_request
+        description: request body
+        required: true
+        schema:
+          $ref: '#/definitions/getSvcAnnouncementsView_request'
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/getSvcAnnouncementsView_response_200'
+          headers:
+            Request-ID:
+              type: string
+              maxLength: 36
+            Correlation-ID:
+              type: string
+              maxLength: 36
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/getSvcAnnouncementsView_response_400'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "401":
+          description: Unauthorized
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationIdheader:
+              type: string
+              maxLength: 36
+        "404":
+          description: Not Found
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+      security:
+      - clientIdHeader: []
+    put:
+      tags:
+      - apiannouncements
+      summary: This method amends an existing announcement
+      description: This method amends an existing announcement
+      operationId: putSvcAnnouncementsAmend
+      parameters:
+      - name: requestId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: correlationId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: environ
+        in: header
+        required: false
+        type: string
+      - name: announcementId
+        in: path
+        required: true
+        type: string
+        maxLength: 20
+      - in: body
+        name: putSvcAnnouncementsAmend_request
+        description: request body
+        required: true
+        schema:
+          $ref: '#/definitions/putSvcAnnouncementsAmend_request'
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/putSvcAnnouncementsAmend_response_200'
+          headers:
+            Request-ID:
+              type: string
+              maxLength: 36
+            Correlation-ID:
+              type: string
+              maxLength: 36
+        "204":
+          description: No Content
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/putSvcAnnouncementsAmend_response_400'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "401":
+          description: Unauthorized
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+      security:
+      - clientIdHeader: []
+    patch:
+      tags:
+      - apiannouncements
+      summary: This method updates a counter for the specified announcement.  This
+        is to count the number of times a user has navigated to details using an embeded
+        URL
+      description: This method updates a counter for the specified announcement.  This
+        is to count the number of times a user has navigated to details using an embeded
+        URL
+      operationId: patchSvcAnnouncementsTally
+      parameters:
+      - name: requestId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: correlationId
+        in: header
+        required: false
+        type: string
+        maxLength: 36
+      - name: announcementId
+        in: path
+        required: true
+        type: string
+        maxLength: 20
+      - in: body
+        name: patchSvcAnnouncementsTally_request
+        description: request body
+        required: true
+        schema:
+          $ref: '#/definitions/patchSvcAnnouncementsTally_request'
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/patchSvcAnnouncementsTally_response_200'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/patchSvcAnnouncementsTally_response_400'
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "401":
+          description: Unauthorized
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+        "404":
+          description: Not Found
+          headers:
+            requestId:
+              type: string
+              maxLength: 36
+            correlationId:
+              type: string
+              maxLength: 36
+      security:
+      - clientIdHeader: []
+definitions:
+  getSvcAnnouncementsList_request:
+    type: object
+    properties:
+      svcAnnouncementsListOperation:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              request:
+                type: object
+                properties:
+                  nextStartFrom:
+                    type: object
+                    properties:
+                      nextStartDate:
+                        type: string
+                        maxLength: 8
+                      nextUpdateTimestamp:
+                        type: string
+                        maxLength: 20
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsList_response_206:
+    type: object
+    properties:
+      svcAnnouncementsListOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  misAnnouncement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        maxLength: 3
+                      announcementType:
+                        type: string
+                        description: The type of announcement.  This one announcement
+                          is of type MIS
+                        maxLength: 3
+                      announcementTitle:
+                        type: string
+                        description: The Title line for the announcement
+                        maxLength: 100
+                      announcementText:
+                        type: string
+                        description: The announcement Text
+                        maxLength: 1000
+                  announcements:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        announcementId:
+                          type: string
+                          maxLength: 20
+                        versionSequence:
+                          type: string
+                          maxLength: 3
+                        announcementType:
+                          type: string
+                          description: The type of announcement.  Currently the only
+                            type is STD
+                          maxLength: 3
+                        acsVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            users then this is "Y"
+                          maxLength: 1
+                        aqisVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            and AQIS users then this is "Y"
+                          maxLength: 1
+                        externalVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            and EXTERNAL users then this is "Y"
+                          maxLength: 1
+                        announcementStartDate:
+                          type: string
+                          maxLength: 8
+                        announcementEndDate:
+                          type: string
+                          maxLength: 8
+                        announcementWithdrawnInd:
+                          type: string
+                          description: If the announcement has been withdrawn this
+                            is "Y"
+                          maxLength: 1
+                        announcementTitle:
+                          type: string
+                          description: The Title line for the announcement
+                          maxLength: 100
+                        announcementText:
+                          type: string
+                          description: The announcement Text
+                          maxLength: 1000
+                        updateTimestamp:
+                          type: string
+                          description: This is the date and time when the announcement
+                            was last updated
+                          maxLength: 20
+                    maxItems: 1000
+                    minItems: 1000
+                  nextStartFrom:
+                    type: object
+                    properties:
+                      nextStartDate:
+                        type: string
+                        description: Start date for next announcement retrieval
+                        maxLength: 8
+                      nextUpdateTimestamp:
+                        type: string
+                        description: Update timestamp for next announcement retrieval
+                        maxLength: 20
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsList_response_400:
+    type: object
+    properties:
+      svcAnnouncementsListOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  errorsCount:
+                    type: string
+                    description: The number of errors returned in the ERRORS array
+                    maxLength: 2
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error Code
+                          maxLength: 6
+                        messsage:
+                          type: string
+                          description: Error Message Text
+                          maxLength: 600
+                        location:
+                          type: string
+                          description: Parameter where error originated
+                          maxLength: 80
+                    maxItems: 50
+                    minItems: 50
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsList_response_200:
+    type: object
+    properties:
+      svcAnnouncementsListOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  misAnnouncement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        maxLength: 3
+                      announcementType:
+                        type: string
+                        description: The type of announcement.  This one announcement
+                          is of type MIS
+                        maxLength: 3
+                      announcementTitle:
+                        type: string
+                        description: The Title line for the announcement
+                        maxLength: 100
+                      announcementText:
+                        type: string
+                        description: The announcement Text
+                        maxLength: 1000
+                  announcements:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        announcementId:
+                          type: string
+                          maxLength: 20
+                        versionSequence:
+                          type: string
+                          maxLength: 3
+                        announcementType:
+                          type: string
+                          description: The type of announcement.  Currently the only
+                            type is STD
+                          maxLength: 3
+                        acsVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            users then this is "Y"
+                          maxLength: 1
+                        aqisVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            and AQIS users then this is "Y"
+                          maxLength: 1
+                        externalVisibilityInd:
+                          type: string
+                          description: If this announcement is visible to only ACS
+                            and EXTERNAL users then this is "Y"
+                          maxLength: 1
+                        announcementStartDate:
+                          type: string
+                          maxLength: 8
+                        announcementEndDate:
+                          type: string
+                          maxLength: 8
+                        announcementWithdrawnInd:
+                          type: string
+                          description: If the announcement has been withdrawn this
+                            is "Y"
+                          maxLength: 1
+                        announcementTitle:
+                          type: string
+                          description: The Title line for the announcement
+                          maxLength: 100
+                        announcementText:
+                          type: string
+                          description: The announcement Text
+                          maxLength: 1000
+                        updateTimestamp:
+                          type: string
+                          description: This is the date and time when the announcement
+                            was last updated
+                          maxLength: 20
+                    maxItems: 1000
+                    minItems: 1000
+                  nextStartFrom:
+                    type: object
+                    properties:
+                      nextStartDate:
+                        type: string
+                        description: Start date for next announcement retrieval
+                        maxLength: 8
+                      nextUpdateTimestamp:
+                        type: string
+                        description: Update timestamp for next announcement retrieval
+                        maxLength: 20
+        required:
+        - DFHWS-DATA
+  postSvcAnnouncementAmend_request:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperation:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              request:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        description: This is the ID of the announcement.  If this
+                          is an ammendment to an existing announcement then this must
+                          be populated.  If this is a new announcement then this should
+                          be omitted.
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        description: This is the version of the announcement.  If
+                          this is an ammendment to an existing announcement then this
+                          must match the current latest version of the announcement
+                          being updated.  If this is a new announcement then this
+                          should be omitted.
+                        maxLength: 3
+                      announcementType:
+                        type: string
+                        description: The type of announcement to be returned.  Currently
+                          the only type is STD
+                        maxLength: 3
+                      acsVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS users then this is "Y"
+                        maxLength: 1
+                      aqisVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS and AQIS users then this is "Y"
+                        maxLength: 1
+                      externalVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS and EXTERNAL users then this is "Y"
+                        maxLength: 1
+                      announcementStartDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          becomes effective.  This date cannot be in the past.
+                        maxLength: 8
+                      announcementEndDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          ceases to be effective.  This can be omitted but if entered
+                          must not be earlier than the announcementStartDate.
+                        maxLength: 8
+                      announcementWithdrawnInd:
+                        type: string
+                        description: This is the date upon which the announcement
+                          was withdrawn.
+                        maxLength: 1
+                      announcementTitle:
+                        type: string
+                        description: The Title line for the announcement
+                        maxLength: 100
+                      announcementText:
+                        type: string
+                        description: The announcement Text
+                        maxLength: 1000
+                      updateTimestamp:
+                        type: string
+                        description: This is the date and time when the announcement
+                          was last updated.  This must match the current latest version
+                          of the announcement being updated.
+                        maxLength: 20
+        required:
+        - DFHWS-DATA
+  postSvcAnnouncementAmend_response_400:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  errorsCount:
+                    type: string
+                    description: The number of errors returned in the ERRORS array
+                    maxLength: 2
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          maxLength: 6
+                        messsage:
+                          type: string
+                          maxLength: 600
+                        location:
+                          type: string
+                          maxLength: 80
+                    maxItems: 50
+                    minItems: 50
+        required:
+        - DFHWS-DATA
+  postSvcAnnouncementAmend_response_201:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        maxLength: 3
+                      announcementEndDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          ceases to be effective.  If blank the announcement remains
+                          effective indefinatly.
+                        maxLength: 8
+                      updateTimestamp:
+                        type: string
+                        description: This is the date and time when the announcement
+                          was last updated
+                        maxLength: 20
+                      latestVersionInd:
+                        type: string
+                        description: If this indicator is "Y" then this is the latest
+                          version of the announcement.
+                        maxLength: 1
+                      announcementWithdrawnInd:
+                        type: string
+                        description: If the announcement has been withdrawn this is
+                          "Y"
+                        maxLength: 1
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsView_request:
+    type: object
+    properties:
+      svcAnnouncementsViewOperation:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              request:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      versionSequence:
+                        type: string
+                        description: This is the version of the announcement.  If
+                          blank the latest version will be returned.
+                        maxLength: 3
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsView_response_400:
+    type: object
+    properties:
+      svcAnnouncementsViewOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  errorsCount:
+                    type: string
+                    maxLength: 2
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          maxLength: 6
+                        messsage:
+                          type: string
+                          maxLength: 600
+                        location:
+                          type: string
+                          maxLength: 80
+                    maxItems: 50
+                    minItems: 50
+        required:
+        - DFHWS-DATA
+  getSvcAnnouncementsView_response_200:
+    type: object
+    properties:
+      svcAnnouncementsViewOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        maxLength: 20
+                      createTimestamp:
+                        type: string
+                        description: The date and time that this version of the announcement
+                          was created
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        maxLength: 3
+                      announcementType:
+                        type: string
+                        description: The type of announcement.  Currently the only
+                          type is STD
+                        maxLength: 3
+                      acsVisibilityInd:
+                        type: string
+                        description: If this announcement is visible to only ACS users
+                          then this is "Y"
+                        maxLength: 1
+                      aqisVisibilityInd:
+                        type: string
+                        description: If this announcement is visible to only ACS and
+                          AQIS users then this is "Y"
+                        maxLength: 1
+                      externalVisibilityInd:
+                        type: string
+                        description: If this announcement is visible to only ACS and
+                          EXTERNAL users then this is "Y"
+                        maxLength: 1
+                      announcementStartDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          became effective.
+                        maxLength: 8
+                      announcementEndDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          ceases to be effective.  If blank the announcement remains
+                          effective indefinatly.
+                        maxLength: 8
+                      announcementWithdrawnInd:
+                        type: string
+                        description: If the announcement has been withdrawn this is
+                          "Y"
+                        maxLength: 1
+                      announcementTitle:
+                        type: string
+                        description: The Title line for the announcement
+                        maxLength: 100
+                      announcementText:
+                        type: string
+                        description: The announcement Text
+                        maxLength: 1000
+                      urlViewedTallyCount:
+                        type: string
+                        description: This is a count of the number of times an embedded
+                          URL has been "clicked" when viewed in the specified announcement.
+                        maxLength: 6
+                      createUserid:
+                        type: string
+                        maxLength: 8
+                      updateUserid:
+                        type: string
+                        maxLength: 8
+                      updateTimestamp:
+                        type: string
+                        description: This is the date and time when the announcement
+                          was last updated
+                        maxLength: 20
+                      latestVersionInd:
+                        type: string
+                        description: If this indicator is "Y" then this is the latest
+                          version of the announcement.
+                        maxLength: 1
+        required:
+        - DFHWS-DATA
+  putSvcAnnouncementsAmend_request:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperation:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              request:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      versionSequence:
+                        type: string
+                        description: This is the version of the announcement.  If
+                          this is an ammendment to an existing announcement then this
+                          must match the current latest version of the announcement
+                          being updated.  If this is a new announcement then this
+                          should be omitted.
+                        maxLength: 3
+                      announcementType:
+                        type: string
+                        description: The type of announcement to be returned.  Currently
+                          the only type is STD
+                        maxLength: 3
+                      acsVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS users then this is "Y"
+                        maxLength: 1
+                      aqisVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS and AQIS users then this is "Y"
+                        maxLength: 1
+                      externalVisibilityInd:
+                        type: string
+                        description: If this announcement is to be visible to only
+                          ACS and EXTERNAL users then this is "Y"
+                        maxLength: 1
+                      announcementStartDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          becomes effective.  This date cannot be in the past.
+                        maxLength: 8
+                      announcementEndDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          ceases to be effective.  This can be omitted but if entered
+                          must not be earlier than the announcementStartDate.
+                        maxLength: 8
+                      announcementWithdrawnInd:
+                        type: string
+                        description: This is the date upon which the announcement
+                          was withdrawn.
+                        maxLength: 1
+                      announcementTitle:
+                        type: string
+                        description: The Title line for the announcement
+                        maxLength: 100
+                      announcementText:
+                        type: string
+                        description: The announcement Text
+                        maxLength: 1000
+                      updateTimestamp:
+                        type: string
+                        description: This is the date and time when the announcement
+                          was last updated.  This must match the current latest version
+                          of the announcement being updated.
+                        maxLength: 20
+        required:
+        - DFHWS-DATA
+  putSvcAnnouncementsAmend_response_400:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  errorsCount:
+                    type: string
+                    description: The number of errors returned in the ERRORS array
+                    maxLength: 2
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          maxLength: 6
+                        messsage:
+                          type: string
+                          maxLength: 600
+                        location:
+                          type: string
+                          maxLength: 80
+                    maxItems: 50
+                    minItems: 50
+        required:
+        - DFHWS-DATA
+  putSvcAnnouncementsAmend_response_200:
+    type: object
+    properties:
+      svcAnnouncementsAmendOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      announcementId:
+                        type: string
+                        maxLength: 20
+                      versionSequence:
+                        type: string
+                        maxLength: 3
+                      announcementEndDate:
+                        type: string
+                        description: This is the date upon which the announcement
+                          ceases to be effective.  If blank the announcement remains
+                          effective indefinatly.
+                        maxLength: 8
+                      updateTimestamp:
+                        type: string
+                        description: This is the date and time when the announcement
+                          was last updated
+                        maxLength: 20
+                      latestVersionInd:
+                        type: string
+                        description: If this indicator is "Y" then this is the latest
+                          version of the announcement.
+                        maxLength: 1
+                      announcementWithdrawnInd:
+                        type: string
+                        description: If the announcement has been withdrawn this is
+                          "Y"
+                        maxLength: 1
+        required:
+        - DFHWS-DATA
+  patchSvcAnnouncementsTally_request:
+    type: object
+    properties:
+      svcAnnouncementsTallyOperation:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              request:
+                type: object
+                properties:
+                  announcement:
+                    type: object
+                    properties:
+                      versionSequence:
+                        type: string
+                        description: This is the version of the announcement.  This
+                          is mandatory.
+                        maxLength: 3
+        required:
+        - DFHWS-DATA
+  patchSvcAnnouncementsTally_response_400:
+    type: object
+    properties:
+      svcAnnouncementsTallyOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  errorsCount:
+                    type: string
+                    description: The number of errors returned in the ERRORS array
+                    maxLength: 2
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                          maxLength: 6
+                        messsage:
+                          type: string
+                          description: Error message text.
+                          maxLength: 600
+                        location:
+                          type: string
+                          description: Parameter where error originated
+                          maxLength: 80
+                    maxItems: 50
+                    minItems: 50
+        required:
+        - DFHWS-DATA
+  patchSvcAnnouncementsTally_response_200:
+    type: object
+    properties:
+      svcAnnouncementsTallyOperationResponse:
+        type: object
+        properties:
+          DFHWS-DATA:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  urlViewedTallyCount:
+                    type: string
+                    description: This is a count of the number of times an embedded
+                      URL has been "clicked" when viewed in the specified announcement.
+                    maxLength: 6
+        required:
+        - DFHWS-DATA
+x-ibm-configuration:
+  gateway: datapower-api-gateway
+  enforced: true
+  phase: realized
+  testable: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        version: 2.0.0
+        timeout: 60
+        cache-response: protocol
+        cache-ttl: 900
+        target-url: $(target-url)$(request.path)
+  properties:
+    target-url:
+      value: http://app01.bcz.gov.au/attachments
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: x-IBM-Client-ID
