@@ -1,2 +1,5 @@
 . ../env.vars
-apic-slim apps:list -s ${CLOUD_ADMIN_SERVER} -o admin --scope org
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+apic-slim apps:list -s ${PORG_SERVER} -o thinker --scope org --consumer-org newton --catalog test
