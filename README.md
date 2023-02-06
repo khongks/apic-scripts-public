@@ -4,7 +4,7 @@ This project contains scripts to manage API Connect using its CLI toolkit.
 
 You should update the file env.vars - configure the values you needed.
 
-The usage can be seend in the create-all.sh.
+The usage can be seemed in the create-all.sh.
 
 
 ## References
