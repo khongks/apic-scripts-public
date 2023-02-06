@@ -1,6 +1,0 @@
-type: portal_service
-name: 
-title: 
-endpoint: 
-client_endpoint_tls_client_profile_url: >-
-  https://cloud-admin-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/tls-client-profiles/8ec9d33b-61fa-4dbb-854e-41c3e92957e2

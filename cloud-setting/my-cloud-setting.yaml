@@ -1,7 +1,0 @@
-type: cloud_setting
-api_version: 2.0.0
-name: cloud-setting
-email_sender:
-  address: kskhong@au1.ibm.com
-mail_server_url: >-
-  https://cloud-admin-ui.9.30.122.188.nip.io/api/orgs/52431536-fff0-419f-9223-8fb951fc99bd/mail-servers/268d34d5-9ced-4319-817c-1440cd1c2031

@@ -1,0 +1,29 @@
+info:
+  name: weather-provider
+  title: Weather Provider
+  version: 2.0.0
+gateways:
+- datapower-api-gateway
+plans:
+  default-plan:
+    rate-limits:
+      default:
+        value: 100/1hour
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    apis:
+      weather-provider-api2.0.0: {}
+apis:
+  weather-provider-api2.0.0:
+    $ref: weather-provider-api_2.0.0.yaml
+visibility:
+  view:
+    type: public
+    orgs: []
+    enabled: true
+  subscribe:
+    type: authenticated
+    orgs: []
+    enabled: true
+product: 1.0.0

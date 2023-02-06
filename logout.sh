@@ -1,3 +1,7 @@
-. ./env.vars
+#!/bin/bash
+
+DIR=$(dirname $0)
+. ${DIR}/./env.vars
+
 echo Logout
-apic-slim logout -s $CLOUD_ADMIN_SERVER
+${APIC_CLI} logout -s $CLOUD_ADMIN_SERVER
