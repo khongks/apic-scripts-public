@@ -3,9 +3,11 @@
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
 
-PROFILE_NAME=${1} # analytics-client-default:1.0.0
+PROFILE_NAME=$1
 VERSION=${2:-"1.0.0"}
-ORG_NAME=${3:-"IBM"}
-SERVER_NAME=${4:-"${APIMGR_SERVER}"}
+CATALOG_NAME=${3:-"Test"}
+ORG_NAME=${4:-"IBM"}
+SCOPE=${5:-"catalog"}
+SERVER_NAME=$6
 
-$DIR/get.sh ${PROFILE_NAME}:${VERSION} ${ORG_NAME} ${SERVER_NAME} | jq -r .url
+$DIR/get.sh ${PROFILE_NAME} ${VERSION} ${CATALOG_NAME} ${ORG_NAME} ${SCOPE} ${SERVER_NAME} | jq -r .url

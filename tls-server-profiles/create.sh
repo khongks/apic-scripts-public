@@ -10,19 +10,72 @@ TRUSTSTORE_NAME=$4
 ORG_NAME=${5:-"IBM"}
 SERVER_NAME=${6:-"${APIMGR_SERVER}"}
 
-KEYSTORE_URL=$($DIR/../keystores/get-url.sh ${KEYSTORE_NAME})
-TRUSTSTORE_URL=$($DIR/../truststores/get-url.sh ${TRUSTSTORE_NAME})
+PROFILE_NAME_SLUGIFIED="$(echo ${PROFILE_NAME} | slugify)"
 
-cat > tls-client-profiles.json <<EOF
+if [ -z "${TRUSTSTORE_NAME}" ]; then
+
+    if [ -z "${KEYSTORE_NAME}" ]; then
+
+        echo "Keystore=N, Truststore=N"
+
+cat > tls-server-profiles.json <<EOF
 {
-    "name": "$(echo ${PROFILE_NAME} | slugify)",
+    "name": "${PROFILE_NAME_SLUGIFIED}",
+    "title": "${PROFILE_NAME}",
+    "version": "${VERSION}"
+}
+EOF
+
+    else
+
+        echo "Keystore=Y, Truststore=N"
+        KEYSTORE_URL=$($DIR/../keystores/get-url.sh ${KEYSTORE_NAME} ${ORG_NAME} ${SERVER_NAME})
+
+cat > tls-server-profiles.json <<EOF
+{
+    "name": "${PROFILE_NAME_SLUGIFIED}",
+    "title": "${PROFILE_NAME}",
+    "version": "${VERSION}",
+    "keystore_url": "${KEYSTORE_URL}"
+}
+EOF
+
+    fi
+else
+    TRUSTSTORE_URL=$($DIR/../truststores/get-url.sh ${TRUSTSTORE_NAME} ${ORG_NAME} ${SERVER_NAME})
+    if [ -z "${KEYSTORE_NAME}" ]; then
+
+        echo "Keystore=N, Truststore=Y"
+
+cat > tls-server-profiles.json <<EOF
+{
+    "name": "${PROFILE_NAME_SLUGIFIED}",
+    "title": "${PROFILE_NAME}",
+    "version": "${VERSION}",
+    "truststore_url": "${TRUSTSTORE_URL}"
+}
+
+EOF
+
+    else 
+
+        echo "Keystore=Y, Truststore=Y"
+        KEYSTORE_URL=$($DIR/../keystores/get-url.sh ${KEYSTORE_NAME} ${ORG_NAME} ${SERVER_NAME})
+
+cat > tls-server-profiles.json <<EOF
+{
+    "name": "${PROFILE_NAME_SLUGIFIED}",
     "title": "${PROFILE_NAME}",
     "version": "${VERSION}",
     "keystore_url": "${KEYSTORE_URL}",
     "truststore_url": "${TRUSTSTORE_URL}"
 }
-EOF
-cat tls-client-profiles.json
 
-${APIC_CLI} tls-client-profiles:create -s ${SERVER_NAME} -o ${ORG_NAME} tls-client-profiles.json --format json --output -
-rm tls-client-profiles.json
+EOF
+    
+    fi
+fi
+cat tls-server-profiles.json
+
+${APIC_CLI} tls-server-profiles:create -s ${SERVER_NAME} -o ${ORG_NAME} tls-server-profiles.json --format json --output -
+rm tls-server-profiles.json

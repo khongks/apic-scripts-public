@@ -7,7 +7,7 @@ CATALOG_NAME=${1:-"Test"}
 ORG_NAME=${2:-"IBM"}
 PORTAL_SERVICE_NAME=${3:-"portal-service"}
 
-PORTAL_SERVICE_JSON=$(${DIR}/../portal-services/get.sh)
+PORTAL_SERVICE_JSON=$(${DIR}/../portal-services/get.sh "${PORTAL_SERVICE_NAME}" "${ORG_NAME}")
 echo ${PORTAL_SERVICE_JSON}
 
 WEB_ENDPOINT_BASE=$(echo ${PORTAL_SERVICE_JSON} | jq -r '.web_endpoint_base')

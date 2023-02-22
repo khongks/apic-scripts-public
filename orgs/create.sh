@@ -3,11 +3,13 @@
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
 
-ORG_NAME=${1:-IBM}
-OWNER_NAME=${2:-khongks}
-LUR_NAME=${3:-api-manager-lur}
-# ${DIR}/../users/get.sh ${OWNER_NAME} ${LUR_NAME}
-OWNER_URL=$(${DIR}/../users/get-url.sh ${OWNER_NAME} ${LUR_NAME})
+ORG_NAME=${1:-"IBM"}
+OWNER_NAME=${2:-"khongks"}
+UR_NAME=${3:-"api-manager-lur"}
+UR_ORG_NAME=$4
+
+echo "${DIR}/../users/get-url.sh ${OWNER_NAME} ${UR_NAME} ${UR_ORG_NAME} ${CLOUD_ADMIN_SERVER}"
+OWNER_URL=$(${DIR}/../users/get-url.sh ${OWNER_NAME} ${UR_NAME} ${UR_ORG_NAME} ${CLOUD_ADMIN_SERVER})
 
 cat > org.json <<EOF
 {

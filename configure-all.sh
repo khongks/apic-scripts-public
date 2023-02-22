@@ -2,7 +2,7 @@
 ## Ref: https://openwhisk.ng.bluemix.net/api/v1/web/API%20Connect%20Native_apic-on-prem/default/index.http
 ## Ref: https://github.com/ibm-apiconnect/example-toolkit-scripts
 
-## Configure you environment variables
+## Configure your environment variables
 . ./env.vars
 
 ## Login to cloud admin
@@ -31,7 +31,7 @@ OWNER_PASSWORD="passw0rd"
 OWNER_FIRSTNAME="Kok Sing"
 OWNER_LASTNAME="Khong"
 OWNER_EMAIL="kskhong@au1.ibm.com"
-./users/create.sh ${OWNER_USERNAME} ${OWNER_PASSWORD} ${OWNER_FIRSTNAME} ${OWNER_LASTNAME} ${OWNER_EMAIL} ${LUR_NAME} "admin"
+./users/create.sh ${OWNER_USERNAME} ${OWNER_PASSWORD} ${OWNER_FIRSTNAME} ${OWNER_LASTNAME} ${OWNER_EMAIL} ${LUR_NAME} "admin" ${CLOUD_ADMIN_SERVER}
 
 ## Create a provider organization
 ORG_NAME="IBM"
@@ -64,8 +64,7 @@ CORG_OWNER_FIRSTNAME="Nigel"
 CORG_OWNER_LASTNAME="Khong"
 CORG_OWNER_EMAIL="nigelkhong@gmail.com"
 CATALOG_LUR_NAME="Test-catalog-0"
-./users/create.sh ${CORG_OWNER_USERNAME} ${CORG_OWNER_PASSWORD} ${CORG_OWNER_FIRSTNAME} ${CORG_OWNER_LASTNAME} ${CORG_OWNER_EMAIL} ${CATALOG_LUR_NAME} ${ORG_NAME}
-# ./users/create.sh nigel passw0rd Nigel Khong nigelkhong@gmail.com Test-catalog-0 IBM
+./users/create.sh ${CORG_OWNER_USERNAME} ${CORG_OWNER_PASSWORD} ${CORG_OWNER_FIRSTNAME} ${CORG_OWNER_LASTNAME} ${CORG_OWNER_EMAIL} ${CATALOG_LUR_NAME} ${ORG_NAME} ${APIMGR_SERVER}
 
 ## Create consumer org
 CONSUMER_ORG_NAME="abc"

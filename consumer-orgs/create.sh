@@ -3,19 +3,21 @@
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
 
-CONSUMER_ORG_NAME=${1:-"DEF"}
-CATALOG_NAME=${2:-"Test"}
-ORG_NAME=${3:-"IBM"}
-OWNER_NAME=${4:-"nigel"}
-CONFIGURED_LUR_NAME=${5:-"Test-catalog-0"}
+CONSUMER_ORG_NAME=$1
+CATALOG_NAME=$2
+ORG_NAME=$3
+OWNER_NAME=$4
+CONFIGURED_USER_REGISTRY_NAME=$5
 
-OWNER_URL=$(${DIR}/../users/get.sh ${OWNER_NAME} ${CONFIGURED_LUR_NAME} ${ORG_NAME} | jq -r .url)
+CONSUMER_ORG_NAME_SLUGIFIED=$(echo ${CONSUMER_ORG_NAME} | slugify)
+
+OWNER_URL=$(${DIR}/../users/get-url.sh ${OWNER_NAME} ${CONFIGURED_USER_REGISTRY_NAME} ${ORG_NAME} ${APIMGR_SERVER})
 
 cat > consumer-org.json <<EOF
 {
     "type": "consumer_org",
     "api_version": "2.0.0",
-    "name": "$(echo ${CONSUMER_ORG_NAME} | slugify)",
+    "name": "${CONSUMER_ORG_NAME_SLUGIFIED}",
     "title": "${CONSUMER_ORG_NAME}",
     "owner_url": "${OWNER_URL}"
 }

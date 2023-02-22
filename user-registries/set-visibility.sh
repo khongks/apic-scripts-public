@@ -6,6 +6,7 @@ DIR=$(dirname $0)
 LUR_NAME=$1 # cloud-manager-lur | api-manager-lur | common-services
 ORG_NAME=${2:-"admin"}
 VISIBLITY=${3:-"public"} # public | private
+SERVER_NAME=$4
 
 cat > visibility.json <<EOF
 {
@@ -18,5 +19,5 @@ cat > visibility.json <<EOF
 EOF
 cat visibility.json
 
-${APIC_CLI} user-registries:update -s ${CLOUD_ADMIN_SERVER} -o ${ORG_NAME} ${LUR_NAME} visibility.json
+${APIC_CLI} user-registries:update -s ${SERVER_NAME} -o ${ORG_NAME} ${LUR_NAME} visibility.json
 rm visibility.json

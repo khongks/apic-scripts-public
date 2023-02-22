@@ -9,12 +9,14 @@ CERT_FILE=$3
 ORG_NAME=${4:-"IBM"}
 SERVER_NAME=${5:-"${APIMGR_SERVER}"}
 
+KEYSTORE_NAME_SLUGIFIED="$(echo ${KEYSTORE_NAME} | slugify)"
+
 cat > keystore.yaml <<EOF
-"name": "$(echo ${KEYSTORE_NAME} | slugify)"
+"name": "${KEYSTORE_NAME_SLUGIFIED}"
 "title": "${KEYSTORE_NAME}"
 "keystore": "$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' ${CERT_FILE})$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' ${KEY_FILE})"
 EOF
-cat keystore.yaml
+# cat keystore.yaml
 
-${APIC_CLI} keystores:create -s ${SERVER_NAME} -o ${ORG_NAME} keystore.yaml --format yaml
+${APIC_CLI} keystores:create -s ${SERVER_NAME} -o ${ORG_NAME} keystore.yaml --format json --output -
 rm keystore.yaml

@@ -18,6 +18,6 @@ cat > credential.json <<EOF
     "client_secret": "${CLIENT_SECRET}"
 }
 EOF
-cat credential.json
+# cat credential.json
 
 ${APIC_CLI} credentials:create -s ${APIMGR_SERVER} --org ${ORG_NAME} --catalog ${CATALOG_NAME} --consumer-org ${CONSUMER_ORG_NAME} --app ${APP_NAME} credential.json --format json --output -

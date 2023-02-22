@@ -6,5 +6,7 @@ DIR=$(dirname $0)
 USER_NAME=$1
 LUR_NAME=${2:-"api-manager-lur"}
 ORG_NAME=${3:-"IBM"}
+SERVER_NAME=$4
 
-$DIR/get.sh ${USER_NAME} ${LUR_NAME} ${ORG_NAME} | jq -r '.url'
+#echo "$DIR/get.sh ${USER_NAME} ${LUR_NAME} ${ORG_NAME} ${SERVER_NAME} | jq -r '.url'"
+$DIR/get.sh ${USER_NAME} ${LUR_NAME} ${ORG_NAME} ${SERVER_NAME} | jq -r '.url'

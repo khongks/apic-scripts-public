@@ -15,7 +15,7 @@ cat > mail-server.json <<EOF
     "type": "mail_server",
     "api_version": "2.0.0",
     "name": "$(echo ${MAIL_SERVER_NAME} | slugify)",
-    "title": "${MAIL_SERVER_NAME})",
+    "title": "${MAIL_SERVER_NAME}",
     "host": "${MAIL_SERVER_HOST}",
     "port": ${MAIL_SERVER_PORT},
     "credentials": {
