@@ -15,5 +15,5 @@ EOF
 cat org.json
 
 echo "Update provider org: ${ORG_NAME}"
-${APIC_CLI} orgs:create --server ${CLOUD_ADMIN_SERVER} org.json
+${APIC_CLI} orgs:update --server ${CLOUD_ADMIN_SERVER} org.json
 rm org.json

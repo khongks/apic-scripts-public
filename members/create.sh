@@ -8,9 +8,10 @@ ROLE_NAME=${2}
 LUR_NAME=${3:-"api-manager-lur"}
 ORG_NAME=${4:-"IBM"}
 SCOPE=${5:-"org"}
+SERVER_NAME=$6
 
-USER_URL=$($DIR/../users/get-url.sh ${MEMBER_NAME} ${LUR_NAME} ${ORG_NAME})
-ROLE_URL=$($DIR/../roles/get-url.sh ${ROLE_NAME} ${ORG_NAME} ${SCOPE})
+USER_URL=$($DIR/../users/get-url.sh "${MEMBER_NAME}" "${LUR_NAME}" "${ORG_NAME}" "${SERVER_NAME}")
+ROLE_URL=$($DIR/../roles/get-url.sh "${ROLE_NAME}" "${ORG_NAME}" "${SCOPE}" "${SERVER_NAME}")
 
 echo "Generating member.yaml file."
 cat > member.yaml <<EOF
