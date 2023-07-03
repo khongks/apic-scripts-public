@@ -1,0 +1,10 @@
+{
+    "type": "cloud_setting",
+    "api_version": "2.0.0",
+    "name": "cloud-setting",
+    "email_sender": {
+      "name": "APIC Administrator",
+      "address": "apicadmin@worksafe.vic.gov.au"
+    },
+    "mail_server_url": ""
+}
