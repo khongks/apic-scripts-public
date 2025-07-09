@@ -1,3 +1,7 @@
 my-*
 .DS_Store
+<<<<<<< HEAD
 wsv*
+=======
+.oidc-azure-ad.vars
+>>>>>>> origin/main

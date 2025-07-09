@@ -1,6 +1,0 @@
-type: mail_server
-api_version: 2.0.0
-name: na-relay-ibm-com
-title: na-relay-ibm-com
-host: na.relay.ibm.com
-port: 25
