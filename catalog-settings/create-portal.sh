@@ -2,18 +2,20 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 CATALOG_NAME=${1:-"Test"}
 ORG_NAME=${2:-"IBM"}
 PORTAL_SERVICE_NAME=${3:-"portal-service"}
 
-PORTAL_SERVICE_JSON=$(${DIR}/../portal-services/get.sh "${PORTAL_SERVICE_NAME}" "${ORG_NAME}")
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
+CATALOG_NAME_SLUGIFIED=$(echo ${CATALOG_NAME} | slugify)
+
+PORTAL_SERVICE_JSON=$(${DIR}/../portal-services/get.sh "${PORTAL_SERVICE_NAME}" "${ORG_NAME_SLUGIFIED}")
 echo ${PORTAL_SERVICE_JSON}
 
 WEB_ENDPOINT_BASE=$(echo ${PORTAL_SERVICE_JSON} | jq -r '.web_endpoint_base')
 PORTAL_SERVICE_URL=$(echo ${PORTAL_SERVICE_JSON} | jq -r '.url')
-ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
-CATALOG_NAME_SLUGIFIED=$(echo ${CATALOG_NAME} | slugify)
 
 cat > portal.json <<EOF
 {

@@ -2,15 +2,10 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
-#!/bin/bash
-
-DIR=$(dirname $0)
-. ${DIR}/../env.vars
-
-
-COMMON_SERVICES_URL=$(${DIR}/../user-registries/get-url.sh "common-services" "admin" ${CLOUD_ADMIN_SERVER})
-API_MANAGER_LUR_URL=$(${DIR}/../user-registries/get-url.sh "api-manager-lur" "admin" ${CLOUD_ADMIN_SERVER})
+COMMON_SERVICES_URL=$(${DIR}/../user-registries/get-url.sh "common-services" "admin" ${CMC_SERVER})
+API_MANAGER_LUR_URL=$(${DIR}/../user-registries/get-url.sh "api-manager-lur" "admin" ${CMC_SERVER})
 
 cat > user-registry-settings.json <<EOF
 {
@@ -23,5 +18,5 @@ cat > user-registry-settings.json <<EOF
 EOF
 cat user-registry-settings.json
 
-${APIC_CLI} user-registry-settings:update -s ${CLOUD_ADMIN_SERVER} user-registry-settings.json
+${APIC_CLI} user-registry-settings:update -s ${CMC_SERVER} user-registry-settings.json
 rm user-registry-settings.json

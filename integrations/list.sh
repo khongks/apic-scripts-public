@@ -5,4 +5,4 @@ DIR=$(dirname $0)
 
 SUB_COLLECTION=$1
 
-${APIC_CLI} integrations:list -s ${CLOUD_ADMIN_SERVER} --subcollection ${SUB_COLLECTION}
+${APIC_CLI} integrations:list -s ${CMC_SERVER} --subcollection ${SUB_COLLECTION}

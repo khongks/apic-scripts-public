@@ -3,9 +3,10 @@
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
 
-EMAIL_SENDER_NAME=${1:-"APIC Administrator"}
-EMAIL_SENDER_ADDRESS=${2:-"admin@apiconnect.net"}
-MAIL_SERVER_NAME=${3:-"mail-trap"}
+MAIL_SERVER_NAME=${1:-"mail-pit"}
+EMAIL_SENDER_NAME=${2:-"APIC Administrator"}
+EMAIL_SENDER_ADDRESS=${3:-"admin@apiconnect.net"}
+
 
 MAIL_SERVER_URL=$(${DIR}/../mail-servers/get-url.sh ${MAIL_SERVER_NAME})
 
@@ -23,5 +24,5 @@ cat > email-settings.json <<EOF
 }
 EOF
 cat email-settings.json
-${APIC_CLI} cloud-settings:update -s ${CLOUD_ADMIN_SERVER} email-settings.json
+${APIC_CLI} cloud-settings:update -s ${CMC_SERVER} email-settings.json
 rm email-settings.json

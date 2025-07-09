@@ -6,4 +6,4 @@ DIR=$(dirname $0)
 ORG_NAME=${1:-"admin"}
 SCOPE=${2:-"org"}
 
-${APIC_CLI} roles:list -s ${CLOUD_ADMIN_SERVER} --org ${ORG_NAME} --scope ${SCOPE}
+${APIC_CLI} roles:list -s ${CMC_SERVER} --org ${ORG_NAME} --scope ${SCOPE}

@@ -2,10 +2,16 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
-LUR_NAME=$1
-ORG_NAME=${2:-"IBM"}
-SERVER_NAME=$3
+USER_REGISTRY_NAME=$1
+ORG_NAME=${2:-"admin"}
+USER_REGISTRY_NAME_SLUGIFIED=$(echo ${LUR_NAME} | slugify)
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
 
-# echo "${APIC_CLI} user-registries:list -s ${CLOUD_ADMIN_SERVER} -o admin --format json --output - | jq --arg NAME "$NAME" '.results[] | select(.name==$NAME)'"
-${APIC_CLI} user-registries:get -s ${SERVER_NAME} -o ${ORG_NAME} --format json --output - ${LUR_NAME}
+SERVER=${CMC_SERVER}
+if [[ ${ORG_NAME} != "admin" ]]; then
+    SERVER=${APIMGR_SERVER}
+fi
+
+${APIC_CLI} user-registries:get -s ${SERVER} -o ${ORG_NAME_SLUGIFIED} --format json --output - ${USER_REGISTRY_NAME_SLUGIFIED}

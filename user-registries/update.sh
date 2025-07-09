@@ -2,6 +2,7 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 USER_REGISTRY_NAME=$1
 ADMIN_DN=${2:-"uid=ldapadmin,ou=Users,o=5bffe66af345a831fc65daa0,dc=jumpcloud,dc=com"}
@@ -13,14 +14,18 @@ LDAP_ENDPOINT_URL=${7:-"ldaps://ldap.jumpcloud.com:636"}
 TLS_CLIENT_PROFILE_NAME=${8:-"tls-client-profile-default"}
 TLS_CLIENT_PROFILE_VERSION=${9:-"1.0.0"}
 ORG_NAME=${10:-"admin"}
-SERVER_NAME=${11}
+
+SERVER=${CMC_SERVER}
+if [[ ${ORG_NAME} != "admin" ]]; then
+    SERVER=${APIMGR_SERVER}
+fi
 
 ORG_URL=$(${DIR}/../orgs/get-url.sh ${ORG_NAME})
-TLS_CLIENT_PROFILE_URL=$(${DIR}/../tls-client-profiles/get-url.sh ${TLS_CLIENT_PROFILE_NAME} ${TLS_CLIENT_PROFILE_VERSION} ${ORG_NAME} ${CLOUD_ADMIN_SERVER})
+TLS_CLIENT_PROFILE_URL=$(${DIR}/../tls-client-profiles/get-url.sh ${TLS_CLIENT_PROFILE_NAME} ${TLS_CLIENT_PROFILE_VERSION} ${ORG_NAME_SLUGIFIED} ${SERVER})
 INTEGRATION_URL=$(${DIR}/../integrations/get-url.sh "ldap" "user-registry")
 
-
 USER_REGISTRY_NAME_SLUGIFIED=$(echo ${USER_REGISTRY_NAME} | slugify)
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
 
 cat > user-registry.json <<EOF
 {
@@ -110,5 +115,5 @@ cat user-registry.json
 #     "url": "https://cpd-cp4i.apps.ocp-3100015379-53wh.cloud.techzone.ibm.com/integration/apis/apic/myapic/api/user-registries/0c083c06-e7cc-4427-ad4b-63b0f9da4203/3f1d9be1-3381-4710-9c24-9e4f9174f75c"
 # }
 
-${APIC_CLI} user-registries:update -s ${SERVER_NAME} -o ${ORG_NAME} ${USER_REGISTRY_NAME_SLUGIFIED} user-registry.json --format json --output -
+${APIC_CLI} user-registries:update -s ${SERVER} -o ${ORG_NAME_SLUGIFIED} ${USER_REGISTRY_NAME_SLUGIFIED} user-registry.json --format json --output -
 rm user-registry.json

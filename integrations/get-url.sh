@@ -7,5 +7,5 @@ DIR=$(dirname $0)
 NAME=${1:-"datapower-api-gateway"}
 SUB_COLLECTION=${2:-"gateway-service"}
 
-${APIC_CLI} integrations:list -s ${CLOUD_ADMIN_SERVER} --subcollection ${SUB_COLLECTION} --format json --output - | jq -r --arg n "$NAME" '.results[]  | select(.name==$n) | .url'
-#${APIC_CLI} integrations:list -s ${CLOUD_ADMIN_SERVER} --subcollection ${SUB_COLLECTION} --format json --output -
+${APIC_CLI} integrations:list -s ${CMC_SERVER} --subcollection ${SUB_COLLECTION} --format json --output - | jq -r --arg n "$NAME" '.results[]  | select(.name==$n) | .url'
+#${APIC_CLI} integrations:list -s ${CMC_SERVER} --subcollection ${SUB_COLLECTION} --format json --output -

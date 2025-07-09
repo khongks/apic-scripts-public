@@ -28,5 +28,5 @@ role_urls:
 EOF
 cat member.yaml
 
-${APIC_CLI} members:create -s ${CLOUD_ADMIN_SERVER} -o ${ORG_NAME} --scope ${SCOPE} member.yaml
+${APIC_CLI} members:create -s ${CMC_SERVER} -o ${ORG_NAME} --scope ${SCOPE} member.yaml
 rm member.yaml

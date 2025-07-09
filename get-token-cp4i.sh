@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CP4I_NAMESPACE=${1:-cp4i}
-APIC_NAMESPACE=${2:-apic-mgmt}
-APIC_RELEASE_NAME=${3:-myapic}
+CP4I_NAMESPACE=${1:-integration}
+APIC_NAMESPACE=${2:-apic}
+APIC_RELEASE_NAME=${3:-apim}
 
 CP4I_ENDPOINT=`oc get route -n ${CP4I_NAMESPACE} cpd -ojson | jq -r '.spec.host'`
 CP4I_USER=`oc get secret -n ibm-common-services platform-auth-idp-credentials -o json | jq -r '.data.admin_username' | base64 -d`

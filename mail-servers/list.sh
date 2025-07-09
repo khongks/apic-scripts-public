@@ -5,4 +5,4 @@ DIR=$(dirname $0)
 
 ORG_NAME=${1:-"admin"}
 
-${APIC_CLI} mail-servers:list -o ${ORG_NAME} -s ${CLOUD_ADMIN_SERVER}
+${APIC_CLI} mail-servers:list -o ${ORG_NAME} -s ${CMC_SERVER}

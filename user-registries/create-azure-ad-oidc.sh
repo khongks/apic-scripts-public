@@ -2,6 +2,7 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 USER_REGISTRY_NAME=$1
 AZURE_TENANT_ID=$2 # 83100458-a9da-4cf4-bf20-a39f85680132
@@ -10,10 +11,9 @@ CLIENT_SECRET=$4 #wqi8Q~iCwqdtli8YQOyshbf6RQMomc-V5MJKJaJm
 TLS_CLIENT_PROFILE_NAME=${5:-"tls-client-profile-default"}
 TLS_CLIENT_PROFILE_VERSION=${6:-"1.0.0"}
 ORG_NAME=${7:-"admin"}
-SERVER_NAME=$8
 
 ORG_URL=$(${DIR}/../orgs/get-url.sh ${ORG_NAME})
-TLS_CLIENT_PROFILE_URL=$(${DIR}/../tls-client-profiles/get-url.sh ${TLS_CLIENT_PROFILE_NAME} ${TLS_CLIENT_PROFILE_VERSION} ${ORG_NAME} ${SERVER_NAME})
+TLS_CLIENT_PROFILE_URL=$(${DIR}/../tls-client-profiles/get-url.sh ${TLS_CLIENT_PROFILE_NAME} ${TLS_CLIENT_PROFILE_VERSION} ${ORG_NAME} ${CMC_SERVER})
 INTEGRATION_URL=$(${DIR}/../integrations/get-url.sh "oidc" "user-registry")
 
 WELL_KNOWN_URL=https://login.microsoftonline.com/${AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration
@@ -74,5 +74,5 @@ EOF
 # cat user-registry.json
 cat user-registry.json
 
-${APIC_CLI} user-registries:create -s ${SERVER_NAME} -o ${ORG_NAME} user-registry.json --format json --output -
+${APIC_CLI} user-registries:create -s ${CMC_SERVER} -o ${ORG_NAME} user-registry.json --format json --output -
 rm user-registry.json

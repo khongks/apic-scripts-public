@@ -15,7 +15,7 @@
 ## Create OIDC user registry
 ##
 USER_REGISTRY_NAME_SLUGIFIED=$(echo ${USER_REGISTRY_NAME} | slugify)
-./user-registries/get.sh "${USER_REGISTRY_NAME_SLUGIFIED}" "${ADMIN_ORG_NAME}" "${CLOUD_ADMIN_SERVER}" > /dev/null 2>&1
+./user-registries/get.sh "${USER_REGISTRY_NAME_SLUGIFIED}" "${ADMIN_ORG_NAME}" "${CMC_SERVER}" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
         echo "User registry ${USER_REGISTRY_NAME_SLUGIFIED} already exist."
 else
@@ -28,7 +28,7 @@ else
                 "${DEF_TLS_CLIENT_PROFILE_NAME}" \
                 "${DEF_TLS_CLIENT_PROFILE_VERSION}" \
                 "${ADMIN_ORG_NAME}" \
-                "${CLOUD_ADMIN_SERVER}"
+                "${CMC_SERVER}"
 fi
 
 ##

@@ -1,0 +1,6 @@
+{
+  "name": "ace-registration",
+  "client_id": "aceuser", 
+  "client_secret": "acePassw0rd!",
+  "client_type": "toolkit"
+}

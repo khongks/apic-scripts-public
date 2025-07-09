@@ -2,9 +2,13 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
-PRODUCT_NAME=$1
-DRAFT_PRODUCT_FILE=$2
+DRAFT_PRODUCT_FILE=$1
+PRODUCT_NAME=$2
 ORG_NAME=${3:-"IBM"}
 
-${APIC_CLI} draft-products:update -o ${ORG_NAME} -s ${APIMGR_SERVER} ${PRODUCT_NAME} ${DRAFT_PRODUCT_FILE}
+PRODUCT_NAME_SLUGIFIED=$(echo ${PRODUCT_NAME} | slugify)
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
+
+${APIC_CLI} draft-products:update -o ${ORG_NAME_SLUGIFIED} -s ${APIMGR_SERVER} ${PRODUCT_NAME_SLUGIFIED} ${DRAFT_PRODUCT_FILE}

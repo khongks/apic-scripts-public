@@ -10,7 +10,7 @@
 
 ## Configure mail server and notification
 ./mail-servers/create.sh
-./cloud-settings/configure-mail-server.sh
+./cloud-settings/update-mail-server.sh "mail-pit"
 
 ## Create topology - 1 x analytics service, 1 x portal service, 1 x gateway service
 ## ./topology/create-analytics-service.sh
@@ -27,11 +27,11 @@ LUR_NAME="api-manager-lur"
 
 ## Create a provider organization owner user
 OWNER_USERNAME="khongks"
-OWNER_PASSWORD="passw0rd"
+OWNER_PASSWORD="Passw0rd!"
 OWNER_FIRSTNAME="Kok Sing"
 OWNER_LASTNAME="Khong"
 OWNER_EMAIL="kskhong@au1.ibm.com"
-./users/create.sh ${OWNER_USERNAME} ${OWNER_PASSWORD} ${OWNER_FIRSTNAME} ${OWNER_LASTNAME} ${OWNER_EMAIL} ${LUR_NAME} "admin" ${CLOUD_ADMIN_SERVER}
+./users/create.sh ${OWNER_USERNAME} ${OWNER_PASSWORD} ${OWNER_FIRSTNAME} ${OWNER_LASTNAME} ${OWNER_EMAIL} ${LUR_NAME} "admin" ${CMC_SERVER}
 
 ## Create a provider organization
 ORG_NAME="IBM"
@@ -64,21 +64,27 @@ CORG_OWNER_FIRSTNAME="Nigel"
 CORG_OWNER_LASTNAME="Khong"
 CORG_OWNER_EMAIL="nigelkhong@gmail.com"
 CATALOG_LUR_NAME="Test-catalog-0"
+# ./users/create.sh "nigel" "Passw0rd\!" "Nigel" "Khong" "nigelkhong@gmail.com" "test-catalog" "demo"
 ./users/create.sh ${CORG_OWNER_USERNAME} ${CORG_OWNER_PASSWORD} ${CORG_OWNER_FIRSTNAME} ${CORG_OWNER_LASTNAME} ${CORG_OWNER_EMAIL} ${CATALOG_LUR_NAME} ${ORG_NAME} ${APIMGR_SERVER}
 
 ## Create consumer org
 CONSUMER_ORG_NAME="abc"
+# ./consumer-orgs/create.sh "Nigel Corg" "Test" "demo" "nigel" "test-catalog"
 ./consumer-orgs/create.sh ${CONSUMER_ORG_NAME} ${CATALOG_NAME} ${ORG_NAME} ${CORG_OWNER_USERNAME} ${CATALOG_LUR_NAME}
 
 ## Create application
 APP_NAME="Sample App"
+# ./apps/create.sh "Sample App" "Nigel Corg" "Test" "Demo"
+# "client_secret": "08779b1ae0ce239229488de784d372aa",
+# "client_id": "abba3a8c51a91d01891452fcde22880b"
 ./apps/create.sh ${APP_NAME} ${CONSUMER_ORG_NAME} ${CATALOG_NAME} ${ORG_NAME}
 
 ## Go to sample folder
 cd sample
 
 ## Import all the products in Draft mode
-PRODUCT_FILE="weather-provider_1.0.0.yaml"
+PRODUCT_FILE="weather-provider_2.0.0.yaml"
+# ../draft-products/create.sh weather-provider_1.0.0.yaml Demo
 ../draft-products/create.sh ${PRODUCT_FILE} ${ORG_NAME}
 
 ## Publish product for testing
@@ -90,8 +96,9 @@ cd ..
 
 ## Subscribe to product
 PRODUCT_NAME="weather-provider"
-PRODUCT_VERSION="1.0.0"
+PRODUCT_VERSION="2.0.0"
 PLAN_NAME="default-plan"
+# ./subscriptions/create.sh "Sample App" "weather-provider" "2.0.0" "default-plan" "Nigel Corg" "Test" "Demo"
 ./subscriptions/create.sh ${APP_NAME} ${PRODUCT_NAME} ${PRODUCT_VERSION} ${PLAN_NAME} ${CONSUMER_ORG_NAME} ${CATALOG_NAME} ${ORG_NAME}
 
 ## Test

@@ -2,9 +2,16 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
-LUR_NAME=$1
-ORG_NAME=${2:-"IBM"}
-SERVER_NAME=$3
+USER_REGISTRY_NAME=$1
+ORG_NAME=${2:-"admin"}
+USER_REGISTRY_NAME_SLUGIFIED=$(echo ${LUR_NAME} | slugify)
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
 
-$DIR/get.sh ${LUR_NAME} ${ORG_NAME} ${SERVER_NAME} | jq -r .url
+SERVER=${CMC_SERVER}
+if [[ ${ORG_NAME} != "admin" ]]; then
+    SERVER=${APIMGR_SERVER}
+fi
+
+$DIR/get.sh ${USER_REGISTRY_NAME_SLUGIFIED} ${ORG_NAME_SLUGIFIED} ${SERVER} | jq -r .url

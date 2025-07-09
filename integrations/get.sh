@@ -7,5 +7,5 @@ DIR=$(dirname $0)
 NAME=${1:-"datapower-api-gateway"}
 SUB_COLLECTION=${2:-"gateway-service"}
 
-# echo "${APIC_CLI} integrations:get -s ${CLOUD_ADMIN_SERVER} --output - --format json --subcollection ${SUB_COLLECTION} ${NAME}"
-${APIC_CLI} integrations:get -s ${CLOUD_ADMIN_SERVER} --output - --format json --subcollection ${SUB_COLLECTION} ${NAME}
+# echo "${APIC_CLI} integrations:get -s ${CMC_SERVER} --output - --format json --subcollection ${SUB_COLLECTION} ${NAME}"
+${APIC_CLI} integrations:get -s ${CMC_SERVER} --output - --format json --subcollection ${SUB_COLLECTION} ${NAME}

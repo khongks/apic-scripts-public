@@ -2,8 +2,12 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 PRODUCT_NAME=$1
 ORG_NAME=${2:-"IBM"}
 
-${APIC_CLI} draft-products:delete -o ${ORG_NAME} -s ${APIMGR_SERVER} ${PRODUCT_NAME}
+PRODUCT_NAME_SLUGIFIED=$(echo ${PRODUCT_NAME} | slugify)
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
+
+${APIC_CLI} draft-products:delete -o ${ORG_NAME_SLUGIFIED} -s ${APIMGR_SERVER} ${PRODUCT_NAME_SLUGIFIED} --confirm ${PRODUCT_NAME_SLUGIFIED}

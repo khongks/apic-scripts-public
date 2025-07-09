@@ -2,6 +2,7 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 API_ENDPOINTS=$1
 CATALOG_NAME=$2

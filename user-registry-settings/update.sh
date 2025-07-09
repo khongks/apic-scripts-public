@@ -2,6 +2,7 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 API_MANAGER_LUR_URL=$($DIR/../user-registries/get-url.sh api-manager-lur)
 IBM_CLOUD_PRIVATE_URL=$($DIR/../user-registries/get-url.sh common-services)
@@ -18,4 +19,4 @@ provider_user_registry_urls:
 EOF
 cat user-registry-settings.yaml
 
-${APIC_CLI} user-registry-settings:update -s ${CLOUD_ADMIN_SERVER} user-registry-settings.yaml
+${APIC_CLI} user-registry-settings:update -s ${CMC_SERVER} user-registry-settings.yaml

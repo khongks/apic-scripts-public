@@ -4,7 +4,7 @@
     "name": "cloud-setting",
     "email_sender": {
       "name": "APIC Administrator",
-      "address": "apicadmin@worksafe.vic.gov.au"
+      "address": "apicadmin@dummy.com"
     },
     "mail_server_url": ""
 }

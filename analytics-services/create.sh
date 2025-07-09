@@ -2,6 +2,9 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
+
+ANALYTICS_SERVICE_NAME=${1:-"analytics-service"}}
 
 TLS_CLIENT_PROFILE_NAME=${1:-"analytics-client-default:1.0.0"}
 AVAILABILITY_ZONE=${2:-"availability-zone-default"}
@@ -18,4 +21,4 @@ client_endpoint_tls_client_profile_url: >-
 EOF
 cat analytics-service.yaml
 
-${APIC_CLI} analytics-services:create -o admin -s ${CLOUD_ADMIN_SERVER} --availability-zone ${AVAILABILITY_ZONE} analytics-service.yaml
+${APIC_CLI} analytics-services:create -o admin -s ${CMC_SERVER} --availability-zone ${AVAILABILITY_ZONE} analytics-service.yaml

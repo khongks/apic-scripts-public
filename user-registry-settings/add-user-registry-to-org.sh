@@ -2,6 +2,7 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 # {
 #     "provider_user_registry_urls": [
@@ -13,7 +14,7 @@ DIR=$(dirname $0)
 
 USER_REGISTRY_NAME=$1
 ORG_NAME=$2
-NEW_URL=$(${DIR}/../user-registries/get-url.sh "${USER_REGISTRY_NAME}" "${ORG_NAME}" "${CLOUD_ADMIN_SERVER}")
+NEW_URL=$(${DIR}/../user-registries/get-url.sh "${USER_REGISTRY_NAME}" "${ORG_NAME}" "${CMC_SERVER}")
 
 admin_user_registry_urls=$(${DIR}/../user-registry-settings/get.sh | jq -r ".admin_user_registry_urls")
 
@@ -82,7 +83,7 @@ cat > user-registry-settings.json <<EOF
 }
 EOF
 cat user-registry-settings.json
-${APIC_CLI} user-registry-settings:update -s ${CLOUD_ADMIN_SERVER} user-registry-settings.json
+${APIC_CLI} user-registry-settings:update -s ${CMC_SERVER} user-registry-settings.json
 rm user-registry-settings.json
 
 elif [[ $toAddAdmin = true && $toAddProvider = false ]]; then
@@ -94,7 +95,7 @@ cat > user-registry-settings.json <<EOF
 }
 EOF
 cat user-registry-settings.json
-${APIC_CLI} user-registry-settings:update -s ${CLOUD_ADMIN_SERVER} user-registry-settings.json
+${APIC_CLI} user-registry-settings:update -s ${CMC_SERVER} user-registry-settings.json
 rm user-registry-settings.json
 
 elif [[ $toAddAdmin = false && $toAddProvider = true ]]; then
@@ -106,7 +107,7 @@ cat > user-registry-settings.json <<EOF
 }
 EOF
 cat user-registry-settings.json
-${APIC_CLI} user-registry-settings:update -s ${CLOUD_ADMIN_SERVER} user-registry-settings.json
+${APIC_CLI} user-registry-settings:update -s ${CMC_SERVER} user-registry-settings.json
 rm user-registry-settings.json
 
 else

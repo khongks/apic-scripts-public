@@ -2,8 +2,14 @@
 
 DIR=$(dirname $0)
 . ${DIR}/../env.vars
+. ${DIR}/../common/common.sh
 
 ORG_NAME=${1:-"admin"}
-SERVER_NAME=$2
+ORG_NAME_SLUGIFIED=$(echo ${ORG_NAME} | slugify)
 
-${APIC_CLI} user-registries:list -s ${SERVER_NAME} -o ${ORG_NAME}
+SERVER=${CMC_SERVER}
+if [[ ${ORG_NAME} != "admin" ]]; then
+    SERVER=${APIMGR_SERVER}
+fi
+
+${APIC_CLI} user-registries:list -s ${SERVER} -o ${ORG_NAME_SLUGIFIED}
